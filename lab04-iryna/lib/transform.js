@@ -1,8 +1,15 @@
 'use strict';
 const fs = require('fs');
 
-module.exports = (currentObj)=>{
-  const bitmap = currentObj;
-  console.log(bitmap);
-  // console.log(bitmap.readInt32LE(10));
+//inverting colors:
+
+module.exports = (colorPalette)=>{
+
+  for (var i = 54; i<=1074; i = i+4){
+  colorPalette[i] = 255 - colorPalette[i];
+  colorPalette[i+1] = 255 - colorPalette[i+1];
+  colorPalette[i+2] = 255 - colorPalette[i+2];
+  return this;
+}
+
 }

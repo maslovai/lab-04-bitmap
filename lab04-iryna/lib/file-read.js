@@ -1,18 +1,21 @@
 'use strict';
 const fs = require('fs');
 
+
 module.exports = (path)=>{
-let bitmap = fs.readFileSync(path);
-console.log(bitmap);
 
-  for (var i = 54; i<=1074; i = i+4){
-     bitmap[i] = 255 - bitmap[i];
-     bitmap[i+1] = 255 - bitmap[i+1];
-     bitmap[i+2] = 255 - bitmap[i+2];
-    //  console.log(i);
-   }
-   console.log(bitmap);
+ let bitmap = fs.readFileSync(path);
 
-fs.writeFile('../asset/newbitmap.bmp', bitmap);   
-  return(bitmap);
+return bitmap;
 }
+
+
+
+
+// Buffer.Constractor = function(bitmap) {
+//  this.BitmapHeader = bitmap.slice(0, 14);
+//  this.DIBHeader = bitmap.slice(14, 54);
+//  this.colorPalette = bitmap.slice(54, 1078);
+//  this.pixelArray = bitmap.slice(1078);
+//  this.length = bitmap.length;
+// };
