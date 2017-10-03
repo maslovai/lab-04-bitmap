@@ -1,10 +1,10 @@
 'use strict';
 const readFile = require('../lab04-iryna/lib/file-read.js');
-const metaConstructor = require('../lab04-iryna/lib/constractor.js');
+const metaConstructor = require('../lab04-iryna/lib/constructor.js');
 const transformFile = require('../lab04-iryna/lib/transform.js');
 const writeFile = require('../lab04-iryna/lib/file-write.js');
 
-const path = '../asset/';
+// const path = '../asset/';
 
 // readFile(path);
 // metaConstruct();
@@ -12,12 +12,14 @@ const path = '../asset/';
 //concat new buffer;
 // writeFile();
 
-let buffer = (readFile('../asset/bitmap0.bmp'));
-console.log('buffer from read: ', buffer);
+let buffer = readFile('../asset/bitmap0.bmp');
+console.log('buffer from read: ', buffer.slice(54, 70));
 
-newBuffObj = metaConstructor(buffer);
+// metaConstructor(buffer);
 
-transformFile(buffer.colorPalette);
+transformFile(buffer);
+console.log('buffer from transform: ', buffer.slice(54, 70));
 
-let newBuffer = new Buffer.concat[buffer.BitmapHeader, buffer.DIBHeader, buffer.colorPalette, buffer.pixelArray, buffer.length]
-writeFile(path + 'inverted.bmp', newBuffer);
+
+// let newBuffer = new Buffer.concat[buffer.BitmapHeader, buffer.DIBHeader, buffer.colorPalette, buffer.pixelArray, buffer.length]
+writeFile('../asset/newbitmap.bpm', buffer);

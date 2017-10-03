@@ -3,13 +3,11 @@ const fs = require('fs');
 
 //inverting colors:
 
-module.exports = (colorPalette)=>{
-
+module.exports = (buffer)=>{
   for (var i = 54; i<=1074; i = i+4){
-  colorPalette[i] = 255 - colorPalette[i];
-  colorPalette[i+1] = 255 - colorPalette[i+1];
-  colorPalette[i+2] = 255 - colorPalette[i+2];
-  return this;
+  buffer[i] = 255 - buffer[i];
+  buffer[i+1] = 255 - buffer[i+1];
+  buffer[i+2] = 255 - buffer[i+2];
 }
-
+return;
 }
