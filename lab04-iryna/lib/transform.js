@@ -9,5 +9,5 @@ module.exports = (buffer)=>{
   buffer[i+1] = 255 - buffer[i+1];
   buffer[i+2] = 255 - buffer[i+2];
 }
-return;
+return buffer;
 }

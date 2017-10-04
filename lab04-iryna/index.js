@@ -17,9 +17,9 @@ console.log('buffer from read: ', buffer.slice(54, 70));
 
 // metaConstructor(buffer);
 
-transformFile(buffer);
+let  newBuff = transformFile(buffer);
 console.log('buffer from transform: ', buffer.slice(54, 70));
 
 
 // let newBuffer = new Buffer.concat[buffer.BitmapHeader, buffer.DIBHeader, buffer.colorPalette, buffer.pixelArray, buffer.length]
-writeFile('../asset/newbitmap.bpm', buffer);
+writeFile('../asset/newbitmap.bmp', newBuff);
