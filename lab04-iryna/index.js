@@ -12,14 +12,14 @@ let newFile = process.argv[3];
 let transformation = process.argv[4];
 
 let buffer = readFile(`../asset/${oldFile}`);
-// console.log('buffer from read: ', buffer.slice(54, 70));
+// console.log('buffer from read: ', buffer);
 
 const newBitmap = new metaConstructor(buffer);
+
+let bufferHolder = transformFile(newBitmap,transformation);
+console.log('buffer from transform: ', bufferHolder);
+
 // console.log('from index newBitmap: ',newBitmap);
-
-transformFile(newBitmap,transformation);
-// console.log('buffer from transform: ', buffer.slice(54, 70));
-
 
 let newBuffer = Buffer.concat([newBitmap.BitmapHeader, newBitmap.DIBHeader, newBitmap.colorPalette, newBitmap.pixelArray], newBitmap.length);
 writeFile(`../asset/${newFile}`, newBuffer);

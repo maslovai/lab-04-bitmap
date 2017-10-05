@@ -4,56 +4,57 @@ const fs = require('fs');
 //inverting colors:
 
 module.exports = (buffer, transformation)=>{
+
 if (transformation ===  "invert" ){
-  console.log('length:', buffer.colorPalette.length);
-  for (var i = 54; i<=(buffer.colorPalette.length-4); i = i+4){
-  buffer[i] = 255 - buffer[i];
-  buffer[i+1] = 255 - buffer[i+1];
-  buffer[i+2] = 255 - buffer[i+2];
- }
+  for (var i = 0; i<=buffer.colorPalette.length; i = i+4){
+  buffer.colorPalette[i] = 255 - buffer.colorPalette[i];
+  buffer.colorPalette[i+1] = 255 - buffer.colorPalette[i+1];
+  buffer.colorPalette[i+2] = 255 - buffer.colorPalette[i+2];
+}
 }
 
 if (transformation === "randomize"){
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
-  for (var i = 54; i<=buffer.colorPalette.length; i = i+4){
-    buffer[i] = getRandomArbitrary(0, 255);
-    buffer[i+1] = getRandomArbitrary(0, 255);
-    buffer[i+2] = getRandomArbitrary(0, 255);
+  for (var i = 0; i<=buffer.colorPalette.length; i = i+4){
+    buffer.colorPalette[i] = getRandomArbitrary(0, 255);
+    buffer.colorPalette[i+1] = getRandomArbitrary(0, 255);
+    buffer.colorPalette[i+2] = getRandomArbitrary(0, 255);
   }
 }
 
 if (transformation === "rotate"){
   let temp;
   let counter = 0;
-  for (var i = 1078; i<=6078; i++){
-      temp = buffer[i];
-      buffer[i] = buffer[11078-counter];
-      buffer[11078-counter]=temp;
+  for (var i = 0; i<(buffer.pixelArray.length/2); i++){
+      temp = buffer.pixelArray[i];
+      buffer.pixelArray[i] = buffer.pixelArray[10000-counter];
+      buffer.pixelArray[10000-counter]=temp;
       counter++;
    }
 }
 
 if (transformation === "frame"){
-      let color = buffer[1078];
+      let color = '#7878f0';
       //top an bottom
-      for (var i=0; i<=99; i++){
-        buffer[1078+i] = color;
-        buffer[1178+i] = color;
-        buffer[1278+i] = color;
-        buffer[10978+i]=color;
-        buffer[10878+i] = color;
-        buffer[10778+i] =color;
+      for (var i=0; i<100; i++){
+        buffer.pixelArray[i] = color;
+        buffer.pixelArray[100+i] = color;
+        buffer.pixelArray[200+i] = color;
+        buffer.pixelArray[9700+i]=color;
+        buffer.pixelArray[9800+i] = color;
+        buffer.pixelArray[9900+i] =color
       }
       //sides
-      for (var i = 0; i<=94; i++){
-        buffer[1378 + i*100] = color;
-        buffer[1379 + i*100] = color;
-        buffer[1380 + i*100] = color;
-        buffer[1478 + i*100] = color;
-        buffer[1477 + i*100] = color;
-        buffer[1476 + i*100] = color;
+      for (var i = 3; i<=97; i++){
+        buffer.pixelArray[i*100]=color;
+        buffer.pixelArray[i*100+1] = color;
+        buffer.pixelArray[i*100+2] = color;
+        buffer.pixelArray[i*100+97] = color;
+        buffer.pixelArray[i*100+98] = color;
+        buffer.pixelArray[i*100+99] = color;
+
       }
  }
 return buffer;
