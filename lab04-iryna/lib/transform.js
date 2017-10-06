@@ -1,12 +1,10 @@
 'use strict';
 const fs = require('fs');
-
 //inverting colors:
 
-module.exports = (buffer, transformation)=>{
-
+module.exports = (buffer, transformation, cb)=>{
 if (transformation ===  "invert" ){
-  for (var i = 0; i<=buffer.colorPalette.length; i = i+4){
+  for (var i = 0; i<=(buffer.colorPalette.length-4); i = i+4){
   buffer.colorPalette[i] = 255 - buffer.colorPalette[i];
   buffer.colorPalette[i+1] = 255 - buffer.colorPalette[i+1];
   buffer.colorPalette[i+2] = 255 - buffer.colorPalette[i+2];
@@ -17,7 +15,7 @@ if (transformation === "randomize"){
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
-  for (var i = 0; i<=buffer.colorPalette.length; i = i+4){
+  for (var i = 0; i<=(buffer.colorPalette.length-4); i = i+4){
     buffer.colorPalette[i] = getRandomArbitrary(0, 255);
     buffer.colorPalette[i+1] = getRandomArbitrary(0, 255);
     buffer.colorPalette[i+2] = getRandomArbitrary(0, 255);
@@ -57,5 +55,6 @@ if (transformation === "frame"){
 
       }
  }
-return buffer;
+ console.log('palette form transform:', buffer.colorPalette);
+ return cb(null, buffer);
 }

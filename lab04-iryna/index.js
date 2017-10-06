@@ -12,16 +12,16 @@ let newFile = process.argv[3];
 let transformation = process.argv[4];
 
 
-let newBitmap = readFile(`../asset/${oldFile}`, function(data){
-  new metaConstructor(data);
-});
-
-console.log(newBitmap);
-transformFile(transformation, newBitmap, function(){
-
-});
-// console.log('buffer from transform: ', bufferHolder);
-
-
-let newBuffer = Buffer.concat([newBitmap.BitmapHeader, newBitmap.DIBHeader, newBitmap.colorPalette, newBitmap.pixelArray], newBitmap.length);
-writeFile(`../asset/${newFile}`, newBuffer);
+readFile(`../asset/${oldFile}`, function(err,data){
+  // console.log('bitmap:', data);
+  new metaConstructor(data, function(err, data){
+    console.log('first palette:', data.colorPalette);
+      transformFile( data, transformation, function(err, data){
+      console.log('new palette:', data.colorPalette);
+      let newBuffer = Buffer.concat([data.BitmapHeader, data.DIBHeader, data.colorPalette, data.pixelArray], data.length);
+      writeFile(`../asset/${newFile}`, newBuffer, function(err, data){
+        console.log('success!')
+      });
+    });
+  });
+})
