@@ -8,8 +8,8 @@ const transformations = ['invert', 'rotate', 'randomize','frame'];
 const cliArgs = process.argv;
 
 let oldFile = process.argv[2];
-let newFile = process.argv[3];
-let transformation = process.argv[4];
+// let newFile = process.argv[3];
+let transformation = process.argv[3];
 
 
 readFile(`../asset/${oldFile}`, function(err,data){
@@ -19,7 +19,7 @@ readFile(`../asset/${oldFile}`, function(err,data){
       transformFile( data, transformation, function(err, data){
       console.log('new palette:', data.colorPalette);
       let newBuffer = Buffer.concat([data.BitmapHeader, data.DIBHeader, data.colorPalette, data.pixelArray], data.length);
-      writeFile(`../asset/${newFile}`, newBuffer, function(err, data){
+      writeFile(`../asset/${oldFile}-${transformation}.bmp`, newBuffer, function(err, data){
         console.log('success!')
       });
     });

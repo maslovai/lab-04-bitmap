@@ -55,6 +55,6 @@ if (transformation === "frame"){
 
       }
  }
- console.log('palette form transform:', buffer.colorPalette);
+ // console.log('palette form transform:', buffer.colorPalette);
  return cb(null, buffer);
 }
